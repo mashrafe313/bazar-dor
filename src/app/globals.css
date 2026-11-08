@@ -75,3 +75,38 @@ a {
     width: min(100% - 24px, 1200px);
   }
 }
+
+
+
+/* Bazar Dor Price Ticker Animation */
+
+.ticker-track {
+  animation: bazar-ticker 45s linear infinite;
+  width: max-content;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes bazar-ticker {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
