@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import ProductSections from "@/components/ProductSections";
 
 const groceries = [
   { emoji: "🍚", name: "চাল", price: "৫৮ টাকা", color: "bg-orange-100" },
@@ -162,7 +163,7 @@ export default function Home() {
 
         </div>
       </section>
-
+ <ProductSections />
     </main>
   );
 }
