@@ -1,5 +1,7 @@
 
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { headers } from "next/headers";
+import { auth } from "@/lib/auth";
 
 type Market = {
   market: string;
@@ -55,14 +57,14 @@ async function getProduct(slug: string): Promise<Product | null> {
     const products = Array.isArray(result)
       ? result
       : Array.isArray(result.data)
-      ? result.data
-      : Array.isArray(result.products)
-      ? result.products
-      : [];
+        ? result.data
+        : Array.isArray(result.products)
+          ? result.products
+          : [];
 
-    return products.find(
-      (product: Product) => product.slug === slug
-    ) || null;
+    return (
+      products.find((product: Product) => product.slug === slug) || null
+    );
   } catch (error) {
     console.error("Product fetching error:", error);
     throw error;
@@ -74,6 +76,16 @@ export default async function ProductDetailsPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  // AUTHENTICATION CHECK
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  // Redirect users who are not logged in
+  if (!session) {
+    redirect("/signin");
+  }
+
   const { slug } = await params;
 
   let product: Product | null;
@@ -87,9 +99,11 @@ export default async function ProductDetailsPage({
           <h1 className="text-2xl font-bold text-[#18251c]">
             তথ্য লোড করা যাচ্ছে না
           </h1>
+
           <p className="mt-3 text-[#718074]">
             অনুগ্রহ করে কিছুক্ষণ পর আবার চেষ্টা করুন।
           </p>
+
           <a
             href="/"
             className="mt-6 inline-block rounded-xl bg-[#16834a] px-6 py-3 font-semibold text-white"
@@ -151,7 +165,6 @@ export default async function ProductDetailsPage({
 
         {/* Product Summary */}
         <section className="rounded-3xl border border-[#e5eae4] bg-white p-6 shadow-sm md:p-10">
-
           <div className="flex flex-col gap-8 md:flex-row md:items-center">
 
             <div className="flex h-36 w-36 shrink-0 items-center justify-center rounded-3xl bg-[#f3f7ef] text-7xl">
@@ -168,8 +181,7 @@ export default async function ProductDetailsPage({
               </h1>
 
               <p className="mt-3 text-[#718074]">
-                বাংলাদেশের বিভিন্ন বাজারে{" "}
-                {product.nameBn} এর আজকের বাজারদর।
+                বাংলাদেশের বিভিন্ন বাজারে {product.nameBn} এর আজকের বাজারদর।
               </p>
 
               <p className="mt-3 font-medium text-[#718074]">
@@ -186,15 +198,15 @@ export default async function ProductDetailsPage({
                     isUp
                       ? "bg-green-100 text-green-700"
                       : isDown
-                      ? "bg-red-100 text-red-600"
-                      : "bg-gray-100 text-gray-500"
+                        ? "bg-red-100 text-red-600"
+                        : "bg-gray-100 text-gray-500"
                   }`}
                 >
                   {isUp
                     ? `▲ ${formatPrice(Number(percentage.toFixed(1)))}%`
                     : isDown
-                    ? `▼ ${formatPrice(Number(Math.abs(percentage).toFixed(1)))}%`
-                    : "— ০.০%"}
+                      ? `▼ ${formatPrice(Number(Math.abs(percentage).toFixed(1)))}%`
+                      : "— ০.০%"}
                 </span>
               </div>
 
@@ -202,7 +214,6 @@ export default async function ProductDetailsPage({
                 গতকালের দাম: {formatPrice(product.yesterday)} টাকা
               </p>
             </div>
-
           </div>
         </section>
 
@@ -215,39 +226,27 @@ export default async function ProductDetailsPage({
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
 
             <div className="rounded-2xl border border-[#e5eae4] bg-white p-6">
-              <p className="text-sm text-[#718074]">
-                সর্বনিম্ন দাম
-              </p>
+              <p className="text-sm text-[#718074]">সর্বনিম্ন দাম</p>
               <h3 className="mt-3 text-3xl font-bold text-green-600">
                 {formatPrice(minimumPrice)}
               </h3>
-              <p className="mt-2 text-sm text-[#718074]">
-                টাকা
-              </p>
+              <p className="mt-2 text-sm text-[#718074]">টাকা</p>
             </div>
 
             <div className="rounded-2xl border border-[#e5eae4] bg-white p-6">
-              <p className="text-sm text-[#718074]">
-                সর্বোচ্চ দাম
-              </p>
+              <p className="text-sm text-[#718074]">সর্বোচ্চ দাম</p>
               <h3 className="mt-3 text-3xl font-bold text-red-500">
                 {formatPrice(maximumPrice)}
               </h3>
-              <p className="mt-2 text-sm text-[#718074]">
-                টাকা
-              </p>
+              <p className="mt-2 text-sm text-[#718074]">টাকা</p>
             </div>
 
             <div className="rounded-2xl border border-[#e5eae4] bg-white p-6">
-              <p className="text-sm text-[#718074]">
-                গড় দাম
-              </p>
+              <p className="text-sm text-[#718074]">গড় দাম</p>
               <h3 className="mt-3 text-3xl font-bold text-[#16834a]">
                 {formatPrice(Math.round(averagePrice))}
               </h3>
-              <p className="mt-2 text-sm text-[#718074]">
-                টাকা
-              </p>
+              <p className="mt-2 text-sm text-[#718074]">টাকা</p>
             </div>
 
           </div>

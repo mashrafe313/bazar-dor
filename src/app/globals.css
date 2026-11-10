@@ -2,8 +2,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
-
 :root {
   --background: #f8faf5;
   --foreground: #18251c;
@@ -76,10 +74,7 @@ a {
   }
 }
 
-
-
 /* Bazar Dor Price Ticker Animation */
-
 .ticker-track {
   animation: bazar-ticker 45s linear infinite;
   width: max-content;
@@ -99,14 +94,8 @@ a {
   }
 }
 
-/* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .ticker-track {
     animation: none;
   }
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
 }

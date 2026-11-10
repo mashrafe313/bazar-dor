@@ -48,7 +48,7 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group rounded-2xl border border-[#e5eae4] bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#16834a] hover:shadow-lg"
+      className="group min-w-0 rounded-2xl border border-[#e5eae4] bg-white p-4 transition-all duration-300 hover:border-[#16834a] hover:shadow-lg sm:p-5 sm:hover:-translate-y-1"
     >
       <div className="mb-5 flex items-center justify-between">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f3f7ef] text-4xl">
@@ -72,7 +72,7 @@ function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
 
-      <h3 className="mb-1 text-xl font-bold text-[#18251c]">
+      <h3 className="mb-1 break-words text-lg font-bold text-[#18251c] sm:text-xl">
         {product.nameBn}
       </h3>
 
@@ -83,7 +83,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="flex items-center justify-between border-t border-[#e5eae4] pt-4">
         <div>
           <p className="text-xs text-[#718074]">আজকের দাম</p>
-          <p className="text-2xl font-bold text-[#16834a]">
+          <p className="text-xl font-bold text-[#16834a] sm:text-2xl">
             {formatPrice(product.today)} টাকা
           </p>
         </div>
@@ -173,12 +173,12 @@ export default function ProductSections() {
     .slice(0, 6);
 
   return (
-    <main className="mx-auto max-w-6xl space-y-20 px-5 py-16">
+    <main className="mx-auto max-w-6xl space-y-14 px-3 py-10 sm:space-y-20 sm:px-5 sm:py-16">
 
       {/* Rising Products */}
       <section>
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[#18251c]">
+          <h2 className="text-2xl font-bold text-[#18251c] sm:text-3xl">
             আজ দাম বেড়েছে <span className="text-green-600">▲</span>
           </h2>
           <p className="mt-2 text-[#718074]">
@@ -200,7 +200,7 @@ export default function ProductSections() {
       {/* Falling Products */}
       <section>
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[#18251c]">
+          <h2 className="text-2xl font-bold text-[#18251c] sm:text-3xl">
             আজ দাম কমেছে <span className="text-red-500">▼</span>
           </h2>
           <p className="mt-2 text-[#718074]">
@@ -222,7 +222,7 @@ export default function ProductSections() {
       {/* All Products */}
       <section id="সব-পণ্য">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-[#18251c]">
+          <h2 className="text-2xl font-bold text-[#18251c] sm:text-3xl">
             সব পণ্য
           </h2>
           <p className="mt-2 text-[#718074]">

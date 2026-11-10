@@ -93,7 +93,7 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="group rounded-2xl border border-[#e5eae4] bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#16834a] hover:shadow-lg"
+      className="group min-w-0 rounded-2xl border border-[#e5eae4] bg-white p-4 transition-all duration-300 hover:border-[#16834a] hover:shadow-lg sm:p-5 sm:hover:-translate-y-1"
     >
       <div className="mb-5 flex items-center justify-between">
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#f3f7ef] text-4xl">
@@ -117,7 +117,7 @@ function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
 
-      <h3 className="mb-1 text-xl font-bold text-[#18251c]">
+     <h3 className="mb-1 break-words text-lg font-bold text-[#18251c] sm:text-xl">
         {product.nameBn}
       </h3>
 
@@ -128,7 +128,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="flex items-center justify-between border-t border-[#e5eae4] pt-4">
         <div>
           <p className="text-xs text-[#718074]">আজকের দাম</p>
-          <p className="text-2xl font-bold text-[#16834a]">
+          <p className="text-xl font-bold text-[#16834a] sm:text-2xl">
             {formatPrice(product.today)} টাকা
           </p>
         </div>
@@ -226,7 +226,7 @@ export default function CategoryPage() {
 
   if (loading) {
     return (
-      <main className="mx-auto min-h-screen max-w-6xl px-5 py-12">
+      <main className="mx-auto min-h-screen max-w-6xl px-3 py-8 sm:px-5 sm:py-12">
         <div className="mb-10 animate-pulse">
           <div className="mb-4 h-10 w-64 rounded-lg bg-gray-200" />
           <div className="h-5 w-80 rounded-lg bg-gray-200" />
@@ -288,7 +288,7 @@ export default function CategoryPage() {
   }
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-5 py-12">
+    <main className="mx-auto min-h-screen max-w-6xl px-3 py-8 sm:px-5 sm:py-12">
       {/* Category Header */}
       <section className="mb-10 rounded-3xl bg-[#f3f7ef] p-7 sm:p-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
