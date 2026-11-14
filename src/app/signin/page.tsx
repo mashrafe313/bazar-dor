@@ -40,22 +40,22 @@ export default function SigninPage() {
     }
   };
 
-  const handleGoogleSignin = async () => {
+  const handleSocialSignin = async (provider: "google" | "github") => {
     setError("");
     setLoading(true);
 
     try {
       const result = await signIn.social({
-        provider: "google",
+        provider,
         callbackURL: "/",
       });
 
       if (result.error) {
-        setError(result.error.message || "Google login failed.");
+        setError(result.error.message || `${provider} login failed.`);
         setLoading(false);
       }
     } catch {
-      setError("Google login failed. Please try again.");
+      setError(`${provider} login failed. Please try again.`);
       setLoading(false);
     }
   };
@@ -125,14 +125,25 @@ export default function SigninPage() {
           <div className="h-px flex-1 bg-gray-200" />
         </div>
 
-        <button
-          type="button"
-          onClick={handleGoogleSignin}
-          disabled={loading}
-          className="w-full rounded-lg border border-gray-300 py-3 font-medium hover:bg-gray-50 disabled:opacity-50"
-        >
-          Continue with Google
-        </button>
+        <div className="space-y-3">
+          <button
+            type="button"
+            onClick={() => handleSocialSignin("google")}
+            disabled={loading}
+            className="w-full rounded-lg border border-gray-300 py-3 font-medium hover:bg-gray-50 disabled:opacity-50"
+          >
+            Continue with Google
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleSocialSignin("github")}
+            disabled={loading}
+            className="w-full rounded-lg border border-gray-300 py-3 font-medium hover:bg-gray-50 disabled:opacity-50"
+          >
+            Continue with GitHub
+          </button>
+        </div>
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account?{" "}

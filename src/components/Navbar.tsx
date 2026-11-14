@@ -79,15 +79,26 @@ export default function Navbar() {
       {/* TOP NAVBAR */}
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-3 py-3 sm:flex-nowrap sm:px-4 sm:py-4">
 
-        {/* LOGO */}
-        <Link href="/" className="shrink-0">
-          <h1 className="text-xl font-extrabold tracking-tight text-[#16834a] sm:text-3xl">
-            বাজার দর
-          </h1>
+        {/* LOGO IMAGE + BRAND TEXT */}
+        <Link
+          href="/"
+          className="flex shrink-0 items-center gap-2 sm:gap-3"
+        >
+          <img
+            src="/assets/logo.png"
+            alt="Bazar Dor Logo"
+            className="h-10 w-10 object-contain sm:h-12 sm:w-12"
+          />
 
-          <p className="mt-1 text-xs text-[#718074]">
-            {banglaDate || "আজকের বাজার"}
-          </p>
+          <div>
+            <h1 className="text-xl font-extrabold tracking-tight text-[#16834a] sm:text-3xl">
+              বাজার দর
+            </h1>
+
+            <p className="mt-1 text-xs text-[#718074]">
+              {banglaDate || "আজকের বাজার"}
+            </p>
+          </div>
         </Link>
 
         {/* AUTH SECTION */}
