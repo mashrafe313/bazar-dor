@@ -14,6 +14,11 @@ export const auth = betterAuth({
 
   baseURL: process.env.BETTER_AUTH_URL,
 
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://bazar-dor-mash.vercel.app",
+  ],
+
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,
@@ -25,10 +30,9 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     },
 
-
-     github: {
-    clientId: process.env.GITHUB_CLIENT_ID!,
-    clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-  },
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    },
   },
 });
