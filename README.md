@@ -92,7 +92,6 @@ GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 ```
 
-**Important:** Replace the empty values with your own credentials. Never upload `.env.local` to GitHub.
 
 ### 5. Start the development server
 
